@@ -16,11 +16,11 @@ namespace RS1_Ispit_asp.net_core.Controllers
 
         public IActionResult Index()
         {
-            NastavnikLoginVM logiraniNastavnik = HttpContext.GetLogiraniKorisnik();
-            if (logiraniNastavnik == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
+            //NastavnikLoginVM logiraniNastavnik = HttpContext.GetLogiraniKorisnik();
+            //if (logiraniNastavnik == null)
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
             return View();
         }
 
