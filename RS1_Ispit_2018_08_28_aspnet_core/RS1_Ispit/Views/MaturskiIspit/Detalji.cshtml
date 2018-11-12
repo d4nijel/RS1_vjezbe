@@ -1,0 +1,48 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+
+@model MaturskiIspitDetaljiVM
+@{
+    ViewData["Title"] = "Detalji";
+}
+
+<h2>Detalji maturskog ispita</h2>
+
+<h3>Podaci o ispitu</h3>
+
+<input asp-for="MaturskiIspitID" hidden />
+
+<div class="form-group">
+    <label>Škola:</label>
+    <input asp-for="Skola" readonly class="form-control" />
+</div>
+<div class="form-group">
+    <label>Odjeljenje:</label>
+    <input asp-for="Odjeljenje" readonly class="form-control" />
+</div>
+<div class="form-group">
+    <label>Ispitivač:</label>
+    <input asp-for="Ispitivac" readonly class="form-control" />
+</div>
+<div class="form-group">
+    <label>Školska godina:</label>
+    <input asp-for="SkolskaGodina" readonly class="form-control" />
+</div>
+<div class="form-group">
+    <label>Datum ispita:</label>
+    <input asp-for="DatumIspita" readonly class="form-control" />
+</div>
+<div class="form-group">
+    <label>Predmet:</label>
+    <input asp-for="Predmet" readonly class="form-control" />
+</div>
+
+<div id="nekiId"></div>
+
+<script>
+    $(document).ready(function () {
+        $.get("/AjaxStavka/Index?id=@Model.MaturskiIspitID",
+            function (rezultat,state) {
+                $("#nekiId").html(rezultat);
+            });
+    });
+</script>

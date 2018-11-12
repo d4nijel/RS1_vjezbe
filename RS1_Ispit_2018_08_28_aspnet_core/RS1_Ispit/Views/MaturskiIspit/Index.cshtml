@@ -1,0 +1,66 @@
+﻿@using RS1_Ispit_asp.net_core.EntityModels
+@using RS1_Ispit_asp.net_core.Helper
+@using RS1_Ispit_asp.net_core.ViewModels
+
+@model MaturskiIspitIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+
+    NastavnikLoginVM logiraniNastavnik = Context.GetLogiraniKorisnik();
+    SkolskaGodina aktuelnaSkolskaGodina = Context.GetAktuelnaSkolskaGodina();
+}
+
+<h3>
+    Logirani nastavnik @if (logiraniNastavnik != null)
+    {
+        <label> @(logiraniNastavnik.ImePrezime)</label>
+        <label> :: @(logiraniNastavnik.SkolaNaziv)</label>
+    }
+</h3>
+
+
+<h3>
+    Aktuelna školska godina @if (aktuelnaSkolskaGodina != null)
+    {
+        <label>@aktuelnaSkolskaGodina.Naziv</label>
+    }
+</h3>
+
+<style>
+    th,td{text-align:center;}
+    #naslov{background-color:gray; color:white;}
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="6" id="naslov">Prikaz evidentiranih maturskih ispita za nastavnika @logiraniNastavnik.ImePrezime</th>
+        </tr>
+        <tr>
+            <th>Datum</th>
+            <th>Škola</th>
+            <th>Predmet</th>
+            <th>Ispitivač</th>
+            <th>Prosječni bodovi</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+        <tr>
+            <td>@x.Datum.ToShortDateString()</td>
+            <td>@x.Skola</td>
+            <td>@x.Predmet</td>
+            <td>@x.Ispitivac</td>
+            <td>@x.ProsjecniBodovi.ToString("F2")</td>
+            <td>
+                <a asp-action="Detalji" asp-route-id="@x.MaturskiIspitId">Detalji</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dodaj" class="btn btn-default">Dodaj</a>

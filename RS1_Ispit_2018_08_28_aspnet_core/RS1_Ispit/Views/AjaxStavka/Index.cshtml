@@ -1,0 +1,76 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model AjaxStavkaIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Rezultati ispita</h3>
+
+<style>
+    th, td, #rezultat {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Opći uspjeh</th>
+            <th>Pristupio ispitu</th>
+            <th>Oslobođen</th>
+            <th>Rezultat (max 100)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.Ucenik</td>
+                <td>@x.OpciUspjeh.ToString("F2")</td>
+                @*<td>@(x.ProstupioIspitu ? "DA" : "NE")</td>*@
+                @if (x.ProstupioIspitu && x.Oslobodjen==false)
+                {
+                    <td><a asp-action="PristupioIspitu" asp-route-id="@x.MaturskiIspitStavkaId" class="btn btn-success" ajax-poziv="da" ajax-rezultat="nekiId">DA</a></td>
+                }
+                else if (!x.ProstupioIspitu && x.Oslobodjen == false)
+                {
+                    <td><a asp-action="PristupioIspitu" asp-route-id="@x.MaturskiIspitStavkaId" class="btn btn-danger" ajax-poziv="da" ajax-rezultat="nekiId">NE</a></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>@(x.Oslobodjen ? "DA" : "NE")</td>
+                @if (x.ProstupioIspitu == false)
+                {
+                    <td>x</td>
+                }
+                else
+                {
+                    @*<td>@x.Rezultat</td>*@
+                    <td>
+                        <form asp-action="SnimiBox" ajax-poziv="da" ajax-rezultat="nekiId">
+                            <input type="hidden" name="MaturskiIspitStavkaId" value="@x.MaturskiIspitStavkaId" />
+                            <input type="text" name="Rezultat" id="rezultat" value="@x.Rezultat" />
+                            <input type="submit" value="Snimi" class="btn btn-default" />
+                        </form>
+                    </td>
+                }
+                @if (x.ProstupioIspitu)
+                {
+                    <td>
+                        <a asp-action="Uredi" asp-route-id="@x.MaturskiIspitStavkaId" ajax-poziv="da" ajax-rezultat="nekiId">Uredi</a>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
