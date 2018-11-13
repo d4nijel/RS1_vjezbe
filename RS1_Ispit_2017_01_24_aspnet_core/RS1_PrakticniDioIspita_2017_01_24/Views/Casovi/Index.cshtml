@@ -1,0 +1,49 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels
+@using Microsoft.AspNetCore.Mvc;
+@using RS1_PrakticniDioIspita_2017_01_24.Helper;
+
+@model CasoviIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+    NastavnikLoginVM logiraniKorisnik = Context.GetLogiraniKorisnik();
+}
+
+<h3>Prikaz održanih časova za nastavnika @logiraniKorisnik.ImePrezime</h3>
+
+<style>
+    td, th {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Datum održanog časa</th>
+            <th>Odjeljenje</th>
+            <th>Broj prisutnih</th>
+            <th>Predmet</th>
+            <th>Najbolji učenik na predmetu</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.DatumOdrzanogCasa.ToShortDateString()</td>
+                <td>@x.Odjeljenje</td>
+                <td>@x.BrojPrisutnih</td>
+                <td>@x.Predmet</td>
+                <td>@x.NajboljiUcenikNaPredmetu</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@x.OdrzaniCasId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dodaj" class="btn btn-default">Dodaj</a>
+

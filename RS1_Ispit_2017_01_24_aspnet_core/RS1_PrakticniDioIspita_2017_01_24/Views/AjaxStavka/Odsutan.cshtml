@@ -1,0 +1,24 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels
+@model AjaxStavkaUrediVM
+
+@{
+    ViewData["Title"] = "Odsutan";
+}
+
+<h2></h2>
+
+<form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="nekiId">
+    <input asp-for="OdrzaniCasDetaljId" hidden />
+    <input asp-for="Odsutan" hidden />
+    <input asp-for="Ocjena" hidden />
+    <div class="form-group">
+        <label>Učenik:</label>
+        <input asp-for="Ucenik" class="form-control" readonly />
+    </div>
+    <div class="form-check">
+        <label>Opravdano odsutan:</label>
+        <input type="checkbox" asp-for="OpravdanoOdsutan" class="form-check-input" />
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>
+

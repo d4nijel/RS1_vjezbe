@@ -1,0 +1,60 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels
+@model AjaxStavkaIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3></h3>
+
+<style>
+    td, th {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Ocjena</th>
+            <th>Prisutan</th>
+            <th>Opravdano odsutan</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.Ucenik</td>
+                @if (!x.Odsutan)
+                {
+                    <td>@x.Ocjena</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (x.Odsutan)
+                {
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljID" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-danger">Odsutan</a>
+                    </td>
+                    <td>@x.OpravdanoOdsutan</td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljID" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-success">Prisutan</a>
+                    </td>
+                    <td></td>
+                }
+                <td>
+                    <a asp-action="Uredi" asp-route-id="@x.OdrzaniCasDetaljID" ajax-poziv="da" ajax-rezultat="nekiId">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

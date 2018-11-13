@@ -1,0 +1,22 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels
+@model CasoviDodajVM
+
+@{
+    ViewData["Title"] = "Dodaj";
+}
+
+<h3>Dodaj čas</h3>
+
+<form asp-action="Snimi">
+    <div class="form-group">
+        <label>Datum:</label>
+        <input type="date" asp-for="Datum" class="form-control" />
+        <span asp-validation-for="Datum" class="text-warning"></span>
+    </div>
+    <div class="form-group">
+        <label>Odjeljenje/Predmet:</label>
+        <select asp-for="AngazovaniId" asp-items="@Model.Angazovani" class="form-control"></select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>
+

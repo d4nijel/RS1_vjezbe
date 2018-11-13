@@ -1,0 +1,37 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels
+@using Microsoft.AspNetCore.Mvc;
+@using RS1_PrakticniDioIspita_2017_01_24.Helper;
+@model CasoviDodajVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3>Editovanje časa</h3>
+
+<form asp-action="Snimi">
+    <input asp-for="OdrzaniCasId" hidden />
+    <div class="form-group">
+        <label>Datum:</label>
+        <input type="date" asp-for="Datum" class="form-control" />
+        <span asp-validation-for="Datum" class="text-warning"></span>
+    </div>
+    <div class="form-group">
+        <label>Odjeljenje/Predmet:</label>
+        <input asp-for="Angazovan" class="form-control" readonly />
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>
+
+<div id="nekiId"></div>
+
+<script>
+    $(document).ready(function () {
+        $.get("/AjaxStavka/Index?id=@Model.OdrzaniCasId",
+            function (rezultat, status) {
+                $("#nekiId").html(rezultat);
+            });
+    });
+</script>
+
+
