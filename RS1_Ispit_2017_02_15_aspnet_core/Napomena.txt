@@ -1,0 +1,17 @@
+Napomena: Testni podaci za sve tabele osim za nove tabele koje nedostaju (OdrzaniCas i OdrzaniCasDetalji) ce ce automatski generisati prilikom inicijalizacije DB-a, tj. prilikom pokretanja aplikacije bez migracije (pogledajte sadržaj fajla MojDBInitializer.cs)
+
+Potrebno je
+1. odpakovati projekat
+2. prepraviti connection string
+3. pokrenuti aplikaciju
+4. na login formi kliknuti na button za logiranje (password korisnika se ne uzima u obzir).
+
+Prilikom prvom pristupanja DB-u, bit ce izvršen sadržaj fajla MojDBInitializer (ukoliko prethodno nije kreiran DB pomocu migracija). Znaci, student ima dvije mogucnosti:
+
+1. pokrenuti prvi put aplikaciju bez izmjene entity klasa - 
+U ovom slucaju generisat ce se postojece tabele bez novih tabela (OdrzaniCas i OdrzaniCasDetalji) i generisat ce se podaci. Zatim, treba aktivirati opciju za migracije i dodati nove tabele pomocu migracija
+
+ili
+
+2. prije prvog pokretanja aplikacije dodati nove entity klase 
+prije prvog pokretanja aplikacije dodati nove entity klase (OdrzaniCas i OdrzaniCasDetalji) a zatim pokrenuti aplikaciju. U ovo slucaju generisat ce se sve potrebne tabele ukljucujuci nove tabele (OdrzaniCas i OdrzaniCasDetalji) sa podacima za stare tabele. S obzirom što je u ovom slucaju nema potrebe da se mijenja DB nakon prvog kreiranja, onda nije potrebno aktivirati migracije.

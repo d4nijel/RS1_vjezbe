@@ -1,0 +1,24 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels;
+
+@model AjaxStavkaUrediVM
+
+@{
+    ViewData["Title"] = "Uredi";
+}
+
+<h2></h2>
+
+<form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="nekiId">
+    <input asp-for="OdrzaniCasDetaljiId" hidden />
+    <div class="form-group">
+        <label>Student:</label>
+        <input asp-for="Student" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Bodovi:</label>
+        <input asp-for="Bodovi" class="form-control" />
+        <span asp-validation-for="Bodovi" class="text-warning"></span>
+    </div>
+    <input type="submit" class="btn btn-default" value="Snimi" />
+</form>
+

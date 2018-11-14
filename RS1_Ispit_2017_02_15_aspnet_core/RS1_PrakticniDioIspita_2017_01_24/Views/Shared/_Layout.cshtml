@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using RS1_PrakticniDioIspita_2017_01_24.Helper;
+@using RS1_PrakticniDioIspita_2017_01_24.ViewModels;
+@{
+    NastavnikLoginVM username = Context.GetLogiraniKorisnik();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Ispit_2017_09_11_DotnetCore</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/site.js"></script>
+    <script src="/JFIT.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Ispit_2017_09_11_DotnetCore</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Cas" asp-action="Index">Casovi</a></li>
+                    <li>
+                        <a asp-area="" asp-controller="Login" asp-action="Logout">
+                            @if (username != null)
+                            {
+                                <label>
+                                    @username.Username
+                                    Logout
+                                </label>
+
+                            }
+                            else
+                            {
+                                <label>
+                                    Login
+                                </label>
+                            }
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2017 - Ispit_2017_09_11_DotnetCore</p>
+        </footer>
+    </div>
+</body>
+</html>

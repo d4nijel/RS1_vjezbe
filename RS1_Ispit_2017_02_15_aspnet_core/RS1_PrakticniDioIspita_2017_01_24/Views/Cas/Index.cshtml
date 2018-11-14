@@ -1,0 +1,55 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.Helper;
+@using RS1_PrakticniDioIspita_2017_01_24.ViewModels;
+
+@model CasIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+    NastavnikLoginVM LogiraniKorisnik = Context.GetLogiraniKorisnik();
+}
+
+<h2></h2>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+
+    #naslov {
+        color: white;
+        background-color: gray;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="6" id="naslov">Prikaz održanih časova za nastavnika @LogiraniKorisnik.ImePrezime</th>
+        </tr>
+        <tr>
+            <th>Datum održanog časa</th>
+            <th>Akademska godina</th>
+            <th>Predmet</th>
+            <th>Broj prisutnih</th>
+            <th>Prosječna ocjena</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.DatumOdrzanogCasa.ToShortDateString()</td>
+                <td>@x.AkademskaGodina</td>
+                <td>@x.Predmet</td>
+                <td>@x.BrojPrisutnihStudenata</td>
+                <td>@x.ProsjecnaOcjena.ToString("F2")</td>
+                <td>
+                    <a asp-action="Uredi" asp-route-id="@x.OdrzaniCasId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dodaj" class="btn btn-default">Dodaj</a>

@@ -1,0 +1,52 @@
+﻿@using RS1_PrakticniDioIspita_2017_01_24.ViewModels;
+
+@model AjaxStavkaIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2></h2>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Bodovi</th>
+            <th>Prisutan</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.Student</td>
+                @if (x.Prisutan)
+                {
+                    <td>@x.Bodovi</td>
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-success">Prisutan</a>
+                    </td>
+                    <td>
+                        <a asp-action="Uredi" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId">Uredi</a>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-danger">Odsutan</a>
+                    </td>
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
