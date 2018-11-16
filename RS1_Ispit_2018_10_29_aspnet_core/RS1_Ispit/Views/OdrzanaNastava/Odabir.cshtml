@@ -1,0 +1,57 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model OdrzanaNastavaOdabirVM
+
+@{
+    ViewData["Title"] = "Odabir";
+}
+
+<h3></h3>
+
+<p>Prikaz održanih časova za nastavnika: <b>@Model.NastavnikImePrezime</b> | škola: <b>@Model.NastavnikSkola</b> </p>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Datum održanog časa</th>
+            <th>Školska godina / Odjeljenje</th>
+            <th>Predmet</th>
+            <th>Odsutni učenici</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.DatumOdrzanogcasa.ToShortDateString()</td>
+                <td>@x.SkolskaGodinaOdjeljenje</td>
+                <td>@x.Predmet</td>
+                @if (x.OdsutniUcenici != null)
+                {
+                    <td>
+                        @foreach (var y in x.OdsutniUcenici)
+                        {
+                            @y;
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    <a asp-action="Uredi" asp-route-id="@x.OdrzaniCasId">Edit</a> |
+                    <a asp-action="Obrisi" asp-route-id="@x.OdrzaniCasId">Obrisi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dodaj" asp-route-id="@Model.NastavnikId" class="btn btn-default">Dodaj</a>

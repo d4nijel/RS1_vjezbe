@@ -1,0 +1,25 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model AjaxStavkaUrediVM
+
+@{
+    ViewData["Title"] = "Odsutan";
+}
+
+<h3></h3>
+
+<form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="nekiId">
+    <input asp-for="OdrzaniCasDetaljiId" hidden />
+    <div class="form-group">
+        <label>Učenik:</label>
+        <input asp-for="Ucenik" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Napomena:</label>
+        <input asp-for="Napomena" class="form-control"/>
+    </div>
+    <div class="form-check">
+        <label>Opravdano odsutan:</label>
+        <input type="checkbox" asp-for="OpravdanoOdsutan" class="form-check" />
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>

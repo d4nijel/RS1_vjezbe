@@ -1,0 +1,37 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model OdrzanaNastavaUrediVM
+
+@{
+    ViewData["Title"] = "Uredi";
+}
+
+<h2>Editovanje časa</h2>
+
+<form asp-action="SnimiEdit">
+    <input asp-for="OdrzaniCasId" hidden />
+    <input asp-for="NastavnikId" hidden />
+    <div class="form-group">
+        <label>Datum:</label>
+        <input type="date" asp-for="DatumCasa" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Odjeljenje:</label>
+        <input asp-for="Odjeljenje" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Sadržaj časa:</label>
+        <input type="text" asp-for="SadrzajCasa" class="form-control" />
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>
+
+<div id="nekiId"></div>
+
+<script>
+    $(document).ready(function () {
+        $.get("/AjaxStavka/Index?id=@Model.OdrzaniCasId",
+            function (rezultat, status) {
+                $("#nekiId").html(rezultat);
+            });
+    });
+</script>

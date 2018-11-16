@@ -1,0 +1,65 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model AjaxStavkaIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2></h2>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Ocjena</th>
+            <th>Prisutan</th>
+            <th>Opravdano odsutan</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.Ucenik</td>
+                @if (x.Ocjena != null)
+                {
+                    <td>@x.Ocjena</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (x.Prisutan)
+                {
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-success">Prisutan</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="UcenikJePrisutan" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId" class="btn btn-danger">Odsutan</a>
+                    </td>
+                }
+                @if (x.OpravdanoOdsutan != null)
+                {
+                    <td>@(x.OpravdanoOdsutan.Value ? "DA" : "NE")</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    <a asp-action="Uredi" asp-route-id="@x.OdrzaniCasDetaljiId" ajax-poziv="da" ajax-rezultat="nekiId">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

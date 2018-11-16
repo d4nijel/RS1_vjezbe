@@ -1,0 +1,37 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@model OdrzanaNastavaIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2></h2>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Škola</th>
+            <th>Ime i prezime nastavnika</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Redovi)
+        {
+            <tr>
+                <td>@x.Skola</td>
+                <td>@x.NastavnikImePrezime</td>
+                <td>
+                    <a asp-action="Odabir" asp-route-id="@x.NastavnikId">Odaberi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
